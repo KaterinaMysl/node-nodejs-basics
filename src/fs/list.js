@@ -1,5 +1,15 @@
+import { dirname } from 'path';
+import fs from "fs/promises";
+import { fileURLToPath } from 'url';
+
 const list = async () => {
-    // Write your code here 
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+  try {
+    const name = await fs.readdir(`${__dirname}/files`, {recursive: true});
+    console.log(name);
+  } catch (error) {
+    throw new Error("FS operation failed");
+  }
 };
 
 await list();
